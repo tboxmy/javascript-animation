@@ -106,39 +106,30 @@ light.position.z = 10;
 
 sphere.position.x = 20;
 
-let cubes = [];
-let cubeCount = 500;
-
-for (let i = 1; i <= cubeCount; i += 1) {
-  let c = createCube();
-  c.position.x = Math.random() * 400 - 200; // -200 to 200
-  c.position.y = Math.random() * 400 - 200; // -200 to 200
-  c.position.z = Math.random() * 400 - 200; // -200 to 200
-  cubes.push(c);
-}
-
-console.log(cubes.length);
-
 scene.add(axesHelper);
-scene.add(cube, sphere, light, lightHelper, ...cubes);
+scene.add(cube, sphere, light, lightHelper);
 
 renderer.render(scene, camera);
 
+let start = 0;
+
 function animate() {
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
-  cube.rotation.z += 0.01;
-
-  cubes.forEach(function (c) {
-    c.rotation.x -= 0.01;
-    c.rotation.y -= 0.01;
-    c.rotation.z -= 0.01;
-  });
-
   // cube.rotation.z -= 0.1;
   // cube.position.z -= 0.1;
   // Muck around with the axes
   // Increment and decrement the x, y, z
+  if (cube.position.x < start + 50) {
+    cube.position.x += 0.1;
+    cube.rotation.y += 0.1;
+  } else if (cube.position.y < 10) cube.position.y += 0.1;
+  else if (cube.position.z < 50) cube.position.z += 0.1;
+  else {
+    start = -50;
+    cube.position.x = start;
+    cube.position.y = 0;
+    cube.position.z = 0;
+    cube.rotation.y = 0;
+  }
   renderer.render(scene, camera);
   requestAnimationFrame(animate); // Can you call animate as soon as you can
 }

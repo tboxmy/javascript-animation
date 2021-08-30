@@ -142,5 +142,5 @@ function animate() {
   renderer.render(scene, camera);
   requestAnimationFrame(animate); // Can you call animate as soon as you can
 }
-
+console.log(process.env.API_KEY);
 animate();

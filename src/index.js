@@ -6,6 +6,7 @@
 // - Lights
 
 const THREE = require("three");
+const orbit = require("three-orbitcontrols");
 
 function createRenderer() {
   let renderer = new THREE.WebGLRenderer({
@@ -60,7 +61,9 @@ function createCube() {
   let geometry = new THREE.BoxGeometry(4, 4, 4);
   // Material - The colour/how it interacts with light
   let material = new THREE.MeshLambertMaterial({
-    color: getRandomColor(),
+    color: "dodgerblue",
+    emissive: getRandomColor(),
+    shininess: 30,
   });
   // Create a mesh by combining the geometry and the material
   let mesh = new THREE.Mesh(geometry, material);
@@ -100,6 +103,7 @@ let sphere = createSphere();
 let light = createLight();
 let lightHelper = createLightHelper(light);
 
+let controls = new orbit(camera, renderer.domElement);
 light.position.x = 10;
 light.position.y = 10;
 light.position.z = 10;

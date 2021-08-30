@@ -19,6 +19,12 @@ Edit package.json
 
 npm run start
 
+## Git
+
+git branch -m master main
+git branch -M main
+git push -u origin
+
 ## Reference
 
 https://expo.dev/
